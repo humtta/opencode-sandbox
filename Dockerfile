@@ -9,3 +9,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt update \
       gh \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
+
+USER ${DEVBOX_USER}:${DEVBOX_USER}
+
+RUN curl -fsSL https://opencode.ai/v2/install | bash -s -- --no-modify-path
