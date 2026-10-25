@@ -13,3 +13,4 @@ RUN DEBIAN_FRONTEND=noninteractive apt update \
 USER ${DEVBOX_USER}:${DEVBOX_USER}
 
 RUN curl -fsSL https://opencode.ai/v2/install | bash -s -- --no-modify-path
+ENV PATH="/home/${DEVBOX_USER}/.opencode/bin:${PATH}"
