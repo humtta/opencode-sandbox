@@ -15,11 +15,11 @@ usage() {
 	EOF
 }
 
-# Default flag values
+# Default option values
 rebuild=false
 temp=false
 
-# Parse flags
+# Parse options
 while [[ "${#}" -gt 0 ]]; do
 	case "${1}" in
 		-h|--help)
