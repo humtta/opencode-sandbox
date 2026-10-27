@@ -21,7 +21,7 @@ usage() {
 
 # Default option values
 rebuild_opt=false
-temp=false
+temp_opt=false
 
 # Parse options
 while [[ "${#}" -gt 0 ]]; do
@@ -37,7 +37,7 @@ while [[ "${#}" -gt 0 ]]; do
 			;;
 
 		-t|--temp)
-			temp=true
+			temp_opt=true
 			shift
 			;;
 
@@ -55,7 +55,7 @@ fi
 
 # Work in the current directory or in a temporary directory if the temp option
 # is given
-if "${temp}"; then
+if "${temp_opt}"; then
 	work_dir="$(mktemp -d)"
 else
 	work_dir="${PWD}"
