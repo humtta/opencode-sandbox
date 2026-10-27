@@ -2,6 +2,18 @@
 
 set -eo pipefail
 
+# Prints the help message.
+usage() {
+	# Tabs and spaces mixed on purpose
+	cat <<-EOF
+		Usage: ${0} [OPTION]...
+
+		Options:
+		  -r, --rebuild    Rebuilds the Docker image
+		  -t, --temp       Opens OpenCode in an empty temporary directory
+	EOF
+}
+
 # Default flag values
 rebuild=false
 temp=false
