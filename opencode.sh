@@ -62,3 +62,6 @@ else
 fi
 
 echo "Working directory: ${work_dir}"
+
+# Base arguments for running the container
+args=(run -it --rm -v "${work_dir}:/workspace" -w /workspace)
