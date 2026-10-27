@@ -5,6 +5,8 @@ set -eo pipefail
 image_id='opencode-sandbox'
 
 repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+opencode_dir="${HOME}/.config/opencode"
+container_home='/home/devbox'
 
 # Prints the help message.
 usage() {
@@ -65,3 +67,8 @@ echo "Working directory: ${work_dir}"
 
 # Base arguments for running the container
 args=(run -it --rm -v "${work_dir}:/workspace" -w /workspace)
+
+# Mount the OpenCode configuration directory if it exists
+if [ -d "${opencode_dir}" ]; then
+	args+=(-v "${opencode_dir}:${container_home}/.config/opencode")
+fi
