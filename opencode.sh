@@ -20,7 +20,7 @@ usage() {
 }
 
 # Default option values
-rebuild=false
+rebuild_opt=false
 temp=false
 
 # Parse options
@@ -32,7 +32,7 @@ while [[ "${#}" -gt 0 ]]; do
 			;;
 
 		-r|--rebuild)
-			rebuild=true
+			rebuild_opt=true
 			shift
 			;;
 
@@ -49,7 +49,7 @@ while [[ "${#}" -gt 0 ]]; do
 done
 
 # Build the image on the first run or whenever the rebuild option is given
-if "${rebuild}" || ! docker image inspect "${image_id}" >/dev/null 2>&1; then
+if "${rebuild_opt}" || ! docker image inspect "${image_id}" >/dev/null 2>&1; then
 	docker build -t "${image_id}" "${repo_dir}"
 fi
 
