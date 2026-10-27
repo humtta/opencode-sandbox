@@ -40,6 +40,11 @@ while [[ "${#}" -gt 0 ]]; do
 			temp=true
 			shift
 			;;
+
+		*)
+			usage
+			exit 1
+			;;
 	esac
 done
 
