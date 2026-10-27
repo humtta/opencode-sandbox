@@ -5,6 +5,7 @@ set -eo pipefail
 image_id='opencode-sandbox'
 
 repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+agents_dir="${HOME}/.agents"
 opencode_dir="${HOME}/.config/opencode"
 container_home='/home/devbox'
 
@@ -67,6 +68,11 @@ echo "Working directory: ${work_dir}"
 
 # Base arguments for running the container
 args=(run -it --rm -v "${work_dir}:/workspace" -w /workspace)
+
+# Mount the agents configuration directory if it exists
+if [ -d "${agents_dir}" ]; then
+	args+=(-v "${agents_dir}:${container_home}/.agents")
+fi
 
 # Mount the OpenCode configuration directory if it exists
 if [ -d "${opencode_dir}" ]; then
