@@ -44,6 +44,11 @@ while [[ "${#}" -gt 0 ]]; do
 			shift
 			;;
 
+		--)
+			shift
+			break
+			;;
+
 		*)
 			usage
 			exit 1
