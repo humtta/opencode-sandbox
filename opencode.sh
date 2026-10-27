@@ -52,3 +52,13 @@ done
 if "${rebuild}" || ! docker image inspect "${image_id}" >/dev/null 2>&1; then
 	docker build -t "${image_id}" "${repo_dir}"
 fi
+
+# Work in the current directory or in a temporary directory if the temp option
+# is given
+if "${temp}"; then
+	work_dir="$(mktemp -d)"
+else
+	work_dir="${PWD}"
+fi
+
+echo "Working directory: ${work_dir}"
