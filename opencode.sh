@@ -2,6 +2,10 @@
 
 set -eo pipefail
 
+image_id='opencode-sandbox'
+
+repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # Prints the help message.
 usage() {
 	# Tabs and spaces mixed on purpose
@@ -38,3 +42,8 @@ while [[ "${#}" -gt 0 ]]; do
 			;;
 	esac
 done
+
+# Build the image on the first run or whenever the rebuild option is given
+if "${rebuild}" || ! docker image inspect "${image_id}" >/dev/null 2>&1; then
+	docker build -t "${image_id}" "${repo_dir}"
+fi
