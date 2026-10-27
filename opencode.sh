@@ -11,6 +11,7 @@ usage() {
 		Options:
 		  -r, --rebuild    Rebuilds the Docker image
 		  -t, --temp       Opens OpenCode in an empty temporary directory
+		  -h, --help       Prints this help message
 	EOF
 }
 
