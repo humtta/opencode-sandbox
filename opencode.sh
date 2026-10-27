@@ -78,3 +78,6 @@ fi
 if [ -d "${opencode_dir}" ]; then
 	args+=(-v "${opencode_dir}:${container_home}/.config/opencode")
 fi
+
+# Run container in the current process
+exec docker "${args[@]}" "${image_id}" "${@}"
