@@ -74,6 +74,9 @@ echo "Working directory: ${work_dir}"
 # Base arguments for running the container
 args=(run -it --rm -v "${work_dir}:/workspace" -w /workspace)
 
+# Persist Nix store
+args+=(-v nix-store:/nix/store)
+
 # Mount the agents configuration directory if it exists
 if [ -d "${agents_dir}" ]; then
 	args+=(-v "${agents_dir}:${container_home}/.agents")
