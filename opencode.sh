@@ -64,7 +64,7 @@ fi
 
 # Build the image on the first run or whenever the rebuild option is given
 if "${rebuild_opt}" || ! docker image inspect "${image_id}" >/dev/null 2>&1; then
-	docker build -t "${image_id}" "${repo_dir}"
+	docker build --pull -t "${image_id}" "${repo_dir}"
 fi
 
 # Work in the current directory or in a temporary directory if the temp option
