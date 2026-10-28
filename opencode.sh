@@ -56,6 +56,12 @@ while [[ "${#}" -gt 0 ]]; do
 	esac
 done
 
+# Check if Docker is installed
+if ! command -v docker &>/dev/null; then
+	echo 'Error: docker is not installed' >&2
+	exit 1
+fi
+
 # Build the image on the first run or whenever the rebuild option is given
 if "${rebuild_opt}" || ! docker image inspect "${image_id}" >/dev/null 2>&1; then
 	docker build -t "${image_id}" "${repo_dir}"
