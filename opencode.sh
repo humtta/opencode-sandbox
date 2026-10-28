@@ -29,30 +29,11 @@ temp_opt=false
 # Parse options
 while [[ "${#}" -gt 0 ]]; do
 	case "${1}" in
-		-h|--help)
-			usage
-			exit 0
-			;;
-
-		-r|--rebuild)
-			rebuild_opt=true
-			shift
-			;;
-
-		-t|--temp)
-			temp_opt=true
-			shift
-			;;
-
-		--)
-			shift
-			break
-			;;
-
-		*)
-			usage
-			exit 1
-			;;
+		-r | --rebuild) rebuild_opt=true && shift ;;
+		-t | --temp) temp_opt=true && shift ;;
+		-h | --help) usage && exit 0 ;;
+		--) shift && break ;;
+		*) usage && exit 1 ;;
 	esac
 done
 
