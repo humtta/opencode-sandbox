@@ -4,7 +4,7 @@ set -eo pipefail
 
 image_id='opencode-sandbox'
 
-repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+repo_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 agents_dir="${HOME}/.agents"
 opencode_dir="${HOME}/.config/opencode"
 container_home='/home/devbox'
