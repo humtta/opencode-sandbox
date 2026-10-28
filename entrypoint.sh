@@ -6,7 +6,7 @@ set -eo pipefail
 args=(--standalone --auto)
 
 # Run OpenCode in the Devbox environment, if available
-if [ -f 'devbox.json' ]; then
+if [ -f 'devbox.json' ] || [ -f 'devbox.jsonc' ]; then
 	exec devbox run opencode "${args[@]}" "${@}"
 fi
 
