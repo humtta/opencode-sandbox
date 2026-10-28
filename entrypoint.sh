@@ -2,9 +2,9 @@
 
 set -eo pipefail
 
-# Start the Devbox shell, if available
+# Run OpenCode in the Devbox environment, if available
 if [ -f 'devbox.json' ]; then
-	devbox shell
+	devbox run opencode "${@}"
 fi
 
 # Run OpenCode in the current process
