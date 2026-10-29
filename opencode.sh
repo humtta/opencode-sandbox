@@ -15,7 +15,7 @@ usage() {
 	cat <<-EOF
 		Run OpenCode in a Docker sandbox.
 
-		Usage: ${0} [OPTION]... [-- ARG...]
+		Usage: ${0##*/} [OPTION]... [-- ARG...]
 
 		Options:
 		  -r, --rebuild    Rebuild the Docker image before starting OpenCode
