@@ -3,7 +3,7 @@
 set -eo pipefail
 
 # Run OpenCode in the Devbox environment, if available
-if [ -f 'devbox.json' ] || [ -f 'devbox.jsonc' ]; then
+if [[ -f 'devbox.json' ]] || [[ -f 'devbox.jsonc' ]]; then
 	exec devbox run opencode "${@}"
 fi
 

@@ -68,12 +68,12 @@ args=(run -it --rm -v "${work_dir}:/workspace" -w /workspace)
 args+=(-v nix-store:/nix/store)
 
 # Mount the agents configuration directory if it exists
-if [ -d "${agents_dir}" ]; then
+if [[ -d "${agents_dir}" ]]; then
 	args+=(-v "${agents_dir}:${container_home}/.agents")
 fi
 
 # Mount the OpenCode configuration directory if it exists
-if [ -d "${opencode_dir}" ]; then
+if [[ -d "${opencode_dir}" ]]; then
 	args+=(-v "${opencode_dir}:${container_home}/.config/opencode")
 fi
 
