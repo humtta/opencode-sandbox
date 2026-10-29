@@ -13,12 +13,15 @@ container_home='/home/devbox'
 usage() {
 	# Tabs and spaces mixed on purpose
 	cat <<-EOF
-		Usage: ${0} [OPTION]...
+		Run OpenCode in a Docker sandbox.
+
+		Usage: ${0} [OPTION]... [-- ARG...]
 
 		Options:
-		  -r, --rebuild    Rebuilds the Docker image
-		  -t, --temp       Opens OpenCode in an empty temporary directory
-		  -h, --help       Prints this help message
+		  -r, --rebuild    Rebuild the Docker image before starting OpenCode
+		  -t, --temp       Start OpenCode in a new empty temporary directory
+		  -h, --help       Show this help message and exit
+		  --               Pass remaining arguments to OpenCode
 	EOF
 }
 
