@@ -21,6 +21,20 @@ symbolic link in `~/.local/bin`:
 ln -fs "$(pwd)/opencode.sh" ~/.local/bin/ocs
 ```
 
+## Usage
+
+Once installed, run the launcher to start OpenCode inside the sandbox:
+
+```sh
+ocs
+```
+
+The current directory is mounted into the container, so OpenCode works only with
+the files of the project you are currently in.
+
+The first run builds the Docker image, which may take some time. Subsequent runs
+reuse the existing image.
+
 ## License
 
 This project is licensed under the [MIT License].
