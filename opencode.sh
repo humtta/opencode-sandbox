@@ -21,7 +21,6 @@ usage() {
 		  -r, --rebuild    Rebuild the Docker image before starting OpenCode
 		  -t, --temp       Start OpenCode in a new empty temporary directory
 		  -h, --help       Show this help message and exit
-		  --               Pass remaining arguments to OpenCode
 	EOF
 }
 
@@ -35,7 +34,6 @@ while [[ "${#}" -gt 0 ]]; do
 		-r | --rebuild) rebuild_opt=true && shift ;;
 		-t | --temp) temp_opt=true && shift ;;
 		-h | --help) usage && exit 0 ;;
-		--) shift && break ;;
 		*) usage && exit 1 ;;
 	esac
 done
@@ -78,4 +76,4 @@ if [[ -d "${opencode_dir}" ]]; then
 fi
 
 # Run container in the current process
-exec docker "${args[@]}" "${image_id}" "${@}"
+exec docker "${args[@]}" "${image_id}"
