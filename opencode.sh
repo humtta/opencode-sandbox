@@ -19,20 +19,17 @@ usage() {
 
 		Options:
 		  -r, --rebuild    Rebuild the Docker image before starting OpenCode
-		  -t, --temp       Start OpenCode in a new empty temporary directory
 		  -h, --help       Show this help message and exit
 	EOF
 }
 
 # Default option values
 rebuild_opt=false
-temp_opt=false
 
 # Parse options
 while [[ "${#}" -gt 0 ]]; do
 	case "${1}" in
 		-r | --rebuild) rebuild_opt=true && shift ;;
-		-t | --temp) temp_opt=true && shift ;;
 		-h | --help) usage && exit 0 ;;
 		*) usage && exit 1 ;;
 	esac
@@ -49,13 +46,8 @@ if "${rebuild_opt}" || ! docker image inspect "${image_id}" >/dev/null 2>&1; the
 	docker build --pull --no-cache -t "${image_id}" "${repo_dir}"
 fi
 
-# Work in the current directory or in a temporary directory if the temp option
-# is given
-if "${temp_opt}"; then
-	work_dir="$(mktemp -d)"
-else
-	work_dir="${PWD}"
-fi
+# Set the working directory
+work_dir="${PWD}"
 
 echo "Working directory: ${work_dir}"
 
