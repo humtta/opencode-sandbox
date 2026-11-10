@@ -14,8 +14,19 @@ container_home='/home/devbox'
 # ANSI escape codes
 black=$'\e[0;30m'
 cyan=$'\e[0;36m'
+red_bold=$'\e[1;31m'
 bold=$'\e[1m'
 reset=$'\e[0m'
+
+# Usage: die MESSAGE
+#
+# Prints an error MESSAGE and exits.
+die() {
+	local message="${@}"
+
+	echo -e "${red_bold}ERROR${reset} ${message}" >&2
+	exit 1
+}
 
 # Usage: usage
 #
