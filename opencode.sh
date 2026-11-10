@@ -31,6 +31,7 @@ usage() {
 		${bold}OPTIONS${reset}
 		  ${cyan}-r, --rebuild${reset}    Rebuild the Docker image before starting OpenCode
 		  ${cyan}-h, --help${reset}       Show this help message and exit
+
 	EOF
 }
 
