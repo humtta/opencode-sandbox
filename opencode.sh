@@ -2,6 +2,8 @@
 
 set -eo pipefail
 
+prog="${0##*/}"
+
 image_id='opencode-sandbox'
 
 repo_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
@@ -15,7 +17,7 @@ usage() {
 	cat <<-EOF
 		Run OpenCode in a Docker sandbox.
 
-		Usage: ${0##*/} [OPTION]...
+		Usage: ${prog} [OPTION]...
 
 		Options:
 		  -r, --rebuild    Rebuild the Docker image before starting OpenCode
