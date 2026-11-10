@@ -11,6 +11,8 @@ agents_dir="${HOME}/.agents"
 opencode_dir="${HOME}/.config/opencode"
 container_home='/home/devbox'
 
+# Usage: usage
+#
 # Prints the help message.
 usage() {
 	# Tabs and spaces mixed on purpose
