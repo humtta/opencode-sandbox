@@ -11,6 +11,12 @@ agents_dir="${HOME}/.agents"
 opencode_dir="${HOME}/.config/opencode"
 container_home='/home/devbox'
 
+# ANSI escape codes
+black=$'\e[0;30m'
+cyan=$'\e[0;36m'
+bold=$'\e[1m'
+reset=$'\e[0m'
+
 # Usage: usage
 #
 # Prints the help message.
@@ -19,11 +25,12 @@ usage() {
 	cat <<-EOF
 		Run OpenCode in a Docker sandbox.
 
-		Usage: ${prog} [OPTION]...
+		${bold}USAGE${reset}
+		  ${cyan}${prog} ${black}[OPTION]...${reset}
 
-		Options:
-		  -r, --rebuild    Rebuild the Docker image before starting OpenCode
-		  -h, --help       Show this help message and exit
+		${bold}OPTIONS${reset}
+		  ${cyan}-r, --rebuild${reset}    Rebuild the Docker image before starting OpenCode
+		  ${cyan}-h, --help${reset}       Show this help message and exit
 	EOF
 }
 
