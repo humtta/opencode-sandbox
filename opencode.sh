@@ -42,12 +42,14 @@ usage() {
 		  Run OpenCode in a Docker sandbox.
 
 		${bold}USAGE${reset}
-		  ${cyan}${prog} ${black}[options]${reset}
+		  ${cyan}${prog} ${black}[<directory>] [options]${reset}
+
+		${bold}ARGUMENTS${reset}
+		  ${cyan}directory${reset}    Directory where OpenCode will be started ${black}(optional)${reset}
 
 		${bold}OPTIONS${reset}
 		  ${cyan}-r, --rebuild${reset}    Rebuild the Docker image before starting OpenCode
-		  ${cyan}-h, --help${reset}       Show this help message and exit
-
+		  ${cyan}-h, --help${reset}       Print this help message and exit
 	EOF
 }
 
