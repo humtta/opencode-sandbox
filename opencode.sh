@@ -13,6 +13,7 @@ container_home='/home/devbox'
 
 # Parameters
 rebuild='false'
+directory="${PWD}"
 
 # ANSI escape codes
 black=$'\e[0;30m'
@@ -90,13 +91,8 @@ if "${rebuild}" || ! docker image inspect "${image_id}" >/dev/null 2>&1; then
 	docker build --pull --no-cache -t "${image_id}" "${repo_dir}"
 fi
 
-# Set the working directory
-work_dir="${PWD}"
-
-echo "Working directory: ${work_dir}"
-
 # Base arguments for running the container
-args=(run -it --rm -v "${work_dir}:/workspace" -w /workspace)
+args=(run -it --rm -v "${directory}:/workspace" -w /workspace)
 
 # Persist Nix store
 args+=(-v nix-store:/nix/store)
