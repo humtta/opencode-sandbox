@@ -50,14 +50,34 @@ usage() {
 	EOF
 }
 
-# Parse options
-while [[ "${#}" -gt 0 ]]; do
-	case "${1}" in
-		-r | --rebuild) rebuild='true' && shift ;;
-		-h | --help) usage && exit 0 ;;
-		*) usage && exit 1 ;;
-	esac
-done
+# Parses the CLI arguments.
+#
+# Arguments:
+#   None
+#
+# Options:
+#   -r, --rebuild (boolean): Rebuilds the Docker image.
+#   -h, --help (boolean): Prints the help message and exits.
+parse_args() {
+	while [[ "${#}" -gt 0 ]]; do
+		case "${1}" in
+			-r | --rebuild)
+				rebuild='true'
+				shift
+				;;
+
+			-h | --help)
+				usage
+				exit 0
+				;;
+
+			*)
+				usage
+				exit 1
+				;;
+		esac
+	done
+}
 
 # Check if Docker is installed
 if ! command -v docker &>/dev/null; then
