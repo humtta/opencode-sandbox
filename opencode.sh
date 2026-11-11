@@ -16,7 +16,7 @@ rebuild='false'
 directory="${PWD}"
 
 # ANSI escape codes
-black=$'\e[0;30m'
+black=$'\e[0;90m'
 cyan=$'\e[0;36m'
 red_bold=$'\e[1;31m'
 bold=$'\e[1m'
