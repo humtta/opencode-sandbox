@@ -12,7 +12,7 @@ opencode_dir="${HOME}/.config/opencode"
 container_home='/home/devbox'
 
 # Parameters
-rebuild=false
+rebuild='false'
 
 # ANSI escape codes
 black=$'\e[0;30m'
@@ -53,7 +53,7 @@ usage() {
 # Parse options
 while [[ "${#}" -gt 0 ]]; do
 	case "${1}" in
-		-r | --rebuild) rebuild=true && shift ;;
+		-r | --rebuild) rebuild='true' && shift ;;
 		-h | --help) usage && exit 0 ;;
 		*) usage && exit 1 ;;
 	esac
