@@ -22,9 +22,7 @@ reset=$'\e[0m'
 #
 # Prints an error MESSAGE and exits.
 die() {
-	local message="${@}"
-
-	echo -e "${red_bold}ERROR${reset} ${message}" >&2
+	echo -e "${red_bold}ERROR${reset} ${@}" >&2
 	exit 1
 }
 
