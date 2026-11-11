@@ -32,10 +32,11 @@ die() {
 usage() {
 	# Tabs and spaces mixed on purpose
 	cat <<-EOF
-		Run OpenCode in a Docker sandbox.
+		${bold}DESCRIPTION${reset}
+		  Run OpenCode in a Docker sandbox.
 
 		${bold}USAGE${reset}
-		  ${cyan}${prog} ${black}[OPTION]...${reset}
+		  ${cyan}${prog} ${black}[options]${reset}
 
 		${bold}OPTIONS${reset}
 		  ${cyan}-r, --rebuild${reset}    Rebuild the Docker image before starting OpenCode
