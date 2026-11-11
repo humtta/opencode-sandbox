@@ -16,7 +16,7 @@ rebuild='false'
 directory="${PWD}"
 
 # ANSI escape codes
-black=$'\e[0;90m'
+gray=$'\e[0;90m'
 cyan=$'\e[0;36m'
 red_bold=$'\e[1;31m'
 bold=$'\e[1m'
@@ -42,10 +42,10 @@ usage() {
 		  Run OpenCode in a Docker sandbox.
 
 		${bold}USAGE${reset}
-		  ${cyan}${prog} ${black}[<directory>] [options]${reset}
+		  ${cyan}${prog} ${gray}[<directory>] [options]${reset}
 
 		${bold}ARGUMENTS${reset}
-		  ${cyan}directory${reset}    Directory where OpenCode will be started ${black}(optional)${reset}
+		  ${cyan}directory${reset}    Directory where OpenCode will be started ${gray}(optional)${reset}
 
 		${bold}OPTIONS${reset}
 		  ${cyan}-r, --rebuild${reset}    Rebuild the Docker image before starting OpenCode
