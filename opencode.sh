@@ -54,12 +54,14 @@ usage() {
 # Parses the CLI arguments.
 #
 # Arguments:
-#   None
+#   1 (directory): Directory where the Docker container will be mounted (optional).
 #
 # Options:
 #   -r, --rebuild (boolean): Rebuilds the Docker image.
 #   -h, --help (boolean): Prints the help message and exits.
 parse_args() {
+	positional_args=()
+
 	while [[ "${#}" -gt 0 ]]; do
 		case "${1}" in
 			-r | --rebuild)
@@ -77,11 +79,27 @@ parse_args() {
 				;;
 
 			*)
-				usage
-				exit 1
+				positional_args+=("${1}")
+				shift
 				;;
 		esac
 	done
+
+	case "${#positional_args[@]}" in
+		0)
+			;;
+
+		1)
+			if [[ ! -d "${positional_args[0]}" ]]; then
+				die "Directory not found: ${cyan}${positional_args[0]}${reset}."
+			fi
+			directory="${positional_args[0]}"
+			;;
+
+		*)
+			die "Too many arguments: expected at most one ${cyan}directory${reset}."
+			;;
+	esac
 }
 
 # Check if Docker is installed
