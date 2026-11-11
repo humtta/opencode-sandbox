@@ -11,6 +11,9 @@ agents_dir="${HOME}/.agents"
 opencode_dir="${HOME}/.config/opencode"
 container_home='/home/devbox'
 
+# Parameters
+rebuild=false
+
 # ANSI escape codes
 black=$'\e[0;30m'
 cyan=$'\e[0;36m'
@@ -47,13 +50,10 @@ usage() {
 	EOF
 }
 
-# Default option values
-rebuild_opt=false
-
 # Parse options
 while [[ "${#}" -gt 0 ]]; do
 	case "${1}" in
-		-r | --rebuild) rebuild_opt=true && shift ;;
+		-r | --rebuild) rebuild=true && shift ;;
 		-h | --help) usage && exit 0 ;;
 		*) usage && exit 1 ;;
 	esac
@@ -66,7 +66,7 @@ if ! command -v docker &>/dev/null; then
 fi
 
 # Build the image on the first run or whenever the rebuild option is given
-if "${rebuild_opt}" || ! docker image inspect "${image_id}" >/dev/null 2>&1; then
+if "${rebuild}" || ! docker image inspect "${image_id}" >/dev/null 2>&1; then
 	docker build --pull --no-cache -t "${image_id}" "${repo_dir}"
 fi
 
