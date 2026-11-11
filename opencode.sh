@@ -18,17 +18,19 @@ red_bold=$'\e[1;31m'
 bold=$'\e[1m'
 reset=$'\e[0m'
 
-# Usage: die MESSAGE
+# Prints an error message and exits the script.
 #
-# Prints an error MESSAGE and exits.
+# Arguments:
+#   * (string): The error message.
 die() {
 	echo -e "${red_bold}ERROR${reset} ${@}" >&2
 	exit 1
 }
 
-# Usage: usage
-#
 # Prints the help message.
+#
+# Arguments:
+#   None
 usage() {
 	# Tabs and spaces mixed on purpose
 	cat <<-EOF
