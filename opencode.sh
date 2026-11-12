@@ -77,6 +77,12 @@ parse_args() {
 				exit 0
 				;;
 
+			--)
+				shift
+				positional_args=("${@}")
+				break
+				;;
+
 			-*)
 				die "Unknown option: ${cyan}${1}${reset}. Run ${cyan}${prog} -h${reset} for help."
 				;;
