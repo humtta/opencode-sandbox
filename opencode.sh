@@ -152,5 +152,5 @@ run_container() {
 		args+=(-v "${opencode_dir}:${container_home}/.config/opencode")
 	fi
 
-	exec docker run "${image_id}" "${args[@]}"
+	exec docker run "${args[@]}" "${image_id}"
 }
