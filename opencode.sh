@@ -144,9 +144,10 @@ build_image() {
 #   None
 run_container() {
 	local container_args=()
+	local workspace_dir="${container_home_dir}/$(basename $(realpath ${directory}))"
 
 	# Base arguments
-	container_args+=(-it --rm -v "${directory}:/workspace" -w /workspace)
+	container_args+=(-it --rm -v "${directory}:/${workspace_dir}" -w "${workspace_dir}")
 
 	# Persist Nix store
 	container_args+=(-v nix-store:/nix/store)
