@@ -154,3 +154,8 @@ run_container() {
 
 	exec docker run "${args[@]}" "${image_id}"
 }
+
+parse_args "${@}"
+check_docker
+build_image
+run_container
