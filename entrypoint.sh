@@ -2,10 +2,13 @@
 
 set -eo pipefail
 
+# Base command
+command=(opencode --standalone)
+
 # Run OpenCode in the Devbox environment, if available
 if [[ -f 'devbox.json' ]] || [[ -f 'devbox.jsonc' ]]; then
-	exec devbox run opencode
+	command=(devbox run "${command[@]}")
 fi
 
 # Run OpenCode in the current process
-exec opencode
+exec "${command[@]}"
