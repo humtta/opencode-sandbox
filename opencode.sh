@@ -114,10 +114,18 @@ check_docker() {
 	fi
 }
 
-# Build the image on the first run or whenever the rebuild option is given
-if "${rebuild}" || ! docker image inspect "${image_id}" >/dev/null 2>&1; then
-	docker build --pull --no-cache -t "${image_id}" "${repo_dir}"
-fi
+# Builds the Docker image.
+#
+# The image is built on the first run (when it does not exist yet) or whenever
+# the rebuild option is given.
+#
+# Arguments:
+#   None
+build_image() {
+	if "${rebuild}" || ! docker image inspect "${image_id}" >/dev/null 2>&1; then
+		docker build --pull --no-cache -t "${image_id}" "${repo_dir}"
+	fi
+}
 
 # Base arguments for running the container
 args=(run -it --rm -v "${directory}:/workspace" -w /workspace)
