@@ -2,14 +2,14 @@
 
 set -eo pipefail
 
-prog="${0##*/}"
+prog_name="${0##*/}"
 
-image_id='opencode-sandbox'
+image_name='opencode-sandbox'
 
 repo_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 agents_dir="${HOME}/.agents"
 opencode_dir="${HOME}/.config/opencode"
-container_home='/home/devbox'
+container_home_dir='/home/devbox'
 
 # Parameters
 rebuild='false'
@@ -42,7 +42,7 @@ usage() {
 		  Run OpenCode in a Docker sandbox.
 
 		${bold}USAGE${reset}
-		  ${cyan}${prog} ${gray}[<directory>] [options]${reset}
+		  ${cyan}${prog_name} ${gray}[<directory>] [options]${reset}
 
 		${bold}ARGUMENTS${reset}
 		  ${cyan}directory${reset}    Directory where OpenCode will be started ${gray}(optional)${reset}
@@ -84,7 +84,7 @@ parse_args() {
 				;;
 
 			-*)
-				die "Unknown option: ${cyan}${1}${reset}. Run ${cyan}${prog} -h${reset} for help."
+				die "Unknown option: ${cyan}${1}${reset}. Run ${cyan}${prog_name} -h${reset} for help."
 				;;
 
 			*)
@@ -130,8 +130,8 @@ check_docker() {
 # Arguments:
 #   None
 build_image() {
-	if "${rebuild}" || ! docker image inspect "${image_id}" >/dev/null 2>&1; then
-		docker build --pull --no-cache -t "${image_id}" "${repo_dir}"
+	if "${rebuild}" || ! docker image inspect "${image_name}" >/dev/null 2>&1; then
+		docker build --pull --no-cache -t "${image_name}" "${repo_dir}"
 	fi
 }
 
@@ -140,25 +140,25 @@ build_image() {
 # Arguments:
 #   None
 run_container() {
-	local args=()
+	local container_args=()
 
 	# Base arguments
-	args+=(-it --rm -v "${directory}:/workspace" -w /workspace)
+	container_args+=(-it --rm -v "${directory}:/workspace" -w /workspace)
 
 	# Persist Nix store
-	args+=(-v nix-store:/nix/store)
+	container_args+=(-v nix-store:/nix/store)
 
 	# Mount the agents configuration directory, if it exists
 	if [[ -d "${agents_dir}" ]]; then
-		args+=(-v "${agents_dir}:${container_home}/.agents")
+		container_args+=(-v "${agents_dir}:${container_home_dir}/.agents")
 	fi
 
 	# Mount the OpenCode configuration directory, if it exists
 	if [[ -d "${opencode_dir}" ]]; then
-		args+=(-v "${opencode_dir}:${container_home}/.config/opencode")
+		container_args+=(-v "${opencode_dir}:${container_home_dir}/.config/opencode")
 	fi
 
-	exec docker run "${args[@]}" "${image_id}"
+	exec docker run "${container_args[@]}" "${image_name}"
 }
 
 parse_args "${@}"
