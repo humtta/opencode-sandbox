@@ -104,11 +104,15 @@ parse_args() {
 	esac
 }
 
-# Check if Docker is installed
-if ! command -v docker &>/dev/null; then
-	echo 'Error: docker is not installed' >&2
-	exit 1
-fi
+# Checks if Docker is installed.
+#
+# Arguments:
+#   None
+check_docker() {
+	if ! command -v docker &>/dev/null; then
+		die 'Docker is not installed.'
+	fi
+}
 
 # Build the image on the first run or whenever the rebuild option is given
 if "${rebuild}" || ! docker image inspect "${image_id}" >/dev/null 2>&1; then
