@@ -18,7 +18,7 @@ Then, `cd` into the cloned directory and install the launcher by creating a
 symbolic link in `~/.local/bin`:
 
 ```
-ln -fs "$(pwd)/opencode.sh" ~/.local/bin/ocs
+ln -fs "${PWD}/opencode.sh" ~/.local/bin/ocs
 ```
 
 ## Usage
