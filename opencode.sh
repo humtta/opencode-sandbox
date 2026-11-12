@@ -64,6 +64,7 @@ usage() {
 parse_args() {
 	positional_args=()
 
+	# Parse arguments
 	while [[ "${#}" -gt 0 ]]; do
 		case "${1}" in
 			-r | --rebuild)
@@ -87,6 +88,7 @@ parse_args() {
 		esac
 	done
 
+	# Parse positional arguments
 	case "${#positional_args[@]}" in
 		0)
 			;;
