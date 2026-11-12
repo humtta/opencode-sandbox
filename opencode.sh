@@ -62,7 +62,7 @@ usage() {
 #   -r, --rebuild (boolean): Rebuilds the Docker image.
 #   -h, --help (boolean): Prints the help message and exits.
 parse_args() {
-	positional_args=()
+	local positional_args=()
 
 	# Parse arguments
 	while [[ "${#}" -gt 0 ]]; do
