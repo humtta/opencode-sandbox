@@ -2,10 +2,13 @@
 
 set -eo pipefail
 
+# Program name
 prog_name="${0##*/}"
 
+# Docker image name
 image_name='opencode-sandbox'
 
+# Directories
 repo_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 agents_dir="${HOME}/.agents"
 opencode_dir="${HOME}/.config/opencode"
