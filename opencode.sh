@@ -129,21 +129,28 @@ build_image() {
 	fi
 }
 
-# Base arguments for running the container
-args=(run -it --rm -v "${directory}:/workspace" -w /workspace)
+# Runs the container in the current process.
+#
+# Arguments:
+#   None
+run_container() {
+	local args=()
 
-# Persist Nix store
-args+=(-v nix-store:/nix/store)
+	# Base arguments
+	args+=(-it --rm -v "${directory}:/workspace" -w /workspace)
 
-# Mount the agents configuration directory if it exists
-if [[ -d "${agents_dir}" ]]; then
-	args+=(-v "${agents_dir}:${container_home}/.agents")
-fi
+	# Persist Nix store
+	args+=(-v nix-store:/nix/store)
 
-# Mount the OpenCode configuration directory if it exists
-if [[ -d "${opencode_dir}" ]]; then
-	args+=(-v "${opencode_dir}:${container_home}/.config/opencode")
-fi
+	# Mount the agents configuration directory, if it exists
+	if [[ -d "${agents_dir}" ]]; then
+		args+=(-v "${agents_dir}:${container_home}/.agents")
+	fi
 
-# Run container in the current process
-exec docker "${args[@]}" "${image_id}"
+	# Mount the OpenCode configuration directory, if it exists
+	if [[ -d "${opencode_dir}" ]]; then
+		args+=(-v "${opencode_dir}:${container_home}/.config/opencode")
+	fi
+
+	exec docker run "${image_id}" "${args[@]}"
+}
