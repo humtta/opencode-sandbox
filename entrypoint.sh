@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-set -eo pipefail
+set -o errexit
+set -o pipefail
 
 # Base command
 command=(opencode --standalone --auto)
