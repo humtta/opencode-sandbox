@@ -154,6 +154,11 @@ run_container() {
 	# Persist Nix store
 	container_args+=(-v nix-store:/nix/store)
 
+	# Import the .env file, if it exists
+	if [[ -f "${directory}/.env" ]]; then
+		container_args+=(--env-file "${directory}/.env")
+	fi
+
 	# Mount the agents configuration directory, if it exists
 	if [[ -d "${agents_dir}" ]]; then
 		container_args+=(-v "${agents_dir}:${container_home_dir}/.agents")
