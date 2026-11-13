@@ -39,8 +39,6 @@ check_var() {
 # Arguments:
 #   None
 import_gpg_public_key() {
-	check_var 'GPG_KEY_FINGERPRINT' 'GPG_PUBLIC_KEY_URL'
-
 	curl -fsS "${GPG_PUBLIC_KEY_URL}" | gpg --quiet --import
 
 	# Check if the expected key was actually imported
@@ -63,6 +61,13 @@ run_opencode() {
 
 	exec "${command[@]}"
 }
+
+# Check environment variables
+check_var \
+	'GIT_USER_NAME' \
+	'GIT_USER_EMAIL' \
+	'GPG_KEY_FINGERPRINT' \
+	'GPG_PUBLIC_KEY_URL'
 
 import_gpg_public_key
 run_opencode
