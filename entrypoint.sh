@@ -30,6 +30,25 @@ check_var() {
 	done
 }
 
+# Imports the GPG public key.
+#
+# Globals:
+#   GPG_KEY_FINGERPRINT
+#   GPG_PUBLIC_KEY_URL
+#
+# Arguments:
+#   None
+import_gpg_public_key() {
+	check_var 'GPG_KEY_FINGERPRINT' 'GPG_PUBLIC_KEY_URL'
+
+	curl -fsS "${GPG_PUBLIC_KEY_URL}" | gpg --quiet --import
+
+	# Check if the expected key was actually imported
+	if ! gpg --list-keys "${GPG_KEY_FINGERPRINT}" >/dev/null 2>&1; then
+		die "Key ${GPG_KEY_FINGERPRINT} not found at ${GPG_PUBLIC_KEY_URL}."
+	fi
+}
+
 # Runs OpenCode in the current process.
 #
 # Arguments:
@@ -45,4 +64,5 @@ run_opencode() {
 	exec "${command[@]}"
 }
 
+import_gpg_public_key
 run_opencode
