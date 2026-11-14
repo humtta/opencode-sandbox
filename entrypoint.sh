@@ -30,7 +30,7 @@ check_var() {
 	done
 }
 
-# Imports the GPG public key.
+# Sets up the GPG key.
 #
 # Globals:
 #   GPG_KEY_FINGERPRINT
@@ -38,7 +38,7 @@ check_var() {
 #
 # Arguments:
 #   None
-import_gpg_public_key() {
+setup_gpg() {
 	curl -fsS "${GPG_PUBLIC_KEY_URL}" | gpg --quiet --import
 
 	# Check if the expected key was actually imported
@@ -72,5 +72,5 @@ check_var \
 	'GPG_KEY_FINGERPRINT' \
 	'GPG_PUBLIC_KEY_URL'
 
-import_gpg_public_key
+setup_gpg
 run_opencode
