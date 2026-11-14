@@ -45,6 +45,9 @@ import_gpg_public_key() {
 	if ! gpg --list-keys "${GPG_KEY_FINGERPRINT}" >/dev/null 2>&1; then
 		die "Key ${GPG_KEY_FINGERPRINT} not found at ${GPG_PUBLIC_KEY_URL}."
 	fi
+
+	# Increase the key's trust level
+	echo "${GPG_KEY_FINGERPRINT}:6:" | gpg --import-ownertrust
 }
 
 # Runs OpenCode in the current process.
