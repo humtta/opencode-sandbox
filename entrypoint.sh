@@ -50,6 +50,26 @@ setup_gpg() {
 	echo "${GPG_KEY_FINGERPRINT}:6:" | gpg --import-ownertrust
 }
 
+# Sets up Git.
+#
+# Globals:
+#   GIT_USER_NAME
+#   GIT_USER_EMAIL
+#   GPG_KEY_FINGERPRINT
+#
+# Arguments:
+#   None
+setup_git() {
+	git config --global user.name "${GIT_USER_NAME}"
+	git config --global user.email "${GIT_USER_EMAIL}"
+
+	git config --global user.signingkey "${GPG_KEY_FINGERPRINT}"
+	git config --global commit.gpgsign true
+	git config --global tag.gpgsign true
+
+	git config --global init.defaultBranch 'main'
+}
+
 # Runs OpenCode in the current process.
 #
 # Arguments:
@@ -73,4 +93,5 @@ check_var \
 	'GPG_PUBLIC_KEY_URL'
 
 setup_gpg
+setup_git
 run_opencode
