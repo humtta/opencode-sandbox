@@ -70,6 +70,18 @@ setup_git() {
 	git config --global init.defaultBranch 'main'
 }
 
+# Sets up gh.
+#
+# Globals:
+#   GH_TOKEN
+#
+# Arguments:
+#   None
+setup_gh() {
+	echo "${GH_TOKEN}" | gh auth login --with-token
+	gh auth setup-git
+}
+
 # Runs OpenCode in the current process.
 #
 # Arguments:
@@ -90,8 +102,10 @@ check_var \
 	'GIT_USER_NAME' \
 	'GIT_USER_EMAIL' \
 	'GPG_KEY_FINGERPRINT' \
-	'GPG_PUBLIC_KEY_URL'
+	'GPG_PUBLIC_KEY_URL' \
+	'GH_TOKEN'
 
 setup_gpg
 setup_git
+setup_gh
 run_opencode
