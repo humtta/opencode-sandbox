@@ -47,7 +47,7 @@ setup_gpg() {
 	fi
 
 	# Increase the key's trust level
-	echo "${GPG_KEY_FINGERPRINT}:6:" | gpg --import-ownertrust
+	echo "${GPG_KEY_FINGERPRINT}:6:" | gpg --import-ownertrust >/dev/null 2>&1
 }
 
 # Sets up Git.
