@@ -169,6 +169,16 @@ run_container() {
 		command_opts+=(-v "${opencode_dir}:${container_home_dir}/.config/opencode")
 	fi
 
+	# Share the host's gpg-agent extra socket with the container, if available
+	if command -v gpgconf &>/dev/null; then
+		local gpg_extra_socket="$(gpgconf --list-dirs agent-extra-socket)"
+		local container_gpg_socket="${container_home_dir}/.gnupg/S.gpg-agent"
+
+		if [[ -S "${gpg_extra_socket}" ]]; then
+			command_opts+=(-v "${gpg_extra_socket}:${container_gpg_socket}")
+		fi
+	fi
+
 	exec docker run "${command_opts[@]}" "${image_name}"
 }
 
