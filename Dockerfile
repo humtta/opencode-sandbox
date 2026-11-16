@@ -21,6 +21,12 @@ ENV PATH="${HOME}/.opencode/bin:${PATH}"
 # Create user configuration directory
 RUN mkdir -p "${HOME}/.config"
 
+# Prepare gpg configuration directory. The host agent socket is mounted here at
+# runtime, so gpg should never attempt to start its own agent.
+RUN mkdir -p "${HOME}/.gnupg" \
+    && chmod 700 "${HOME}/.gnupg" \
+    && echo 'no-autostart' > "${HOME}/.gnupg/gpg.conf"
+
 # Run entrypoint script
 COPY --chmod=755 entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
