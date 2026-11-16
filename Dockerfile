@@ -6,6 +6,7 @@ USER root
 RUN DEBIAN_FRONTEND=noninteractive apt update \
     && apt install -y --no-install-recommends \
       curl \
+      gpg \
       git \
       gh \
     && apt clean \
