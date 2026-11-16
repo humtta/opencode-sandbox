@@ -56,6 +56,7 @@ setup_gpg() {
 #   GIT_USER_NAME
 #   GIT_USER_EMAIL
 #   GPG_KEY_FINGERPRINT
+#   GH_TOKEN
 #
 # Arguments:
 #   None
@@ -68,17 +69,8 @@ setup_git() {
 	git config --global tag.gpgsign true
 
 	git config --global init.defaultBranch 'main'
-}
 
-# Sets up gh.
-#
-# Globals:
-#   GH_TOKEN
-#
-# Arguments:
-#   None
-setup_gh() {
-	echo "${GH_TOKEN}" | gh auth login --with-token
+	# Use gh as a credential helper
 	gh auth setup-git
 }
 
@@ -107,5 +99,4 @@ check_var \
 
 setup_gpg
 setup_git
-setup_gh
 run_opencode
