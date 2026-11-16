@@ -145,31 +145,31 @@ build_image() {
 # Arguments:
 #   None
 run_container() {
-	local container_args=()
+	local command_opts=()
 	local workspace_dir="${container_home_dir}/$(basename $(realpath ${directory}))"
 
 	# Base arguments
-	container_args+=(-it --rm -v "${directory}:/${workspace_dir}" -w "${workspace_dir}")
+	command_opts+=(-it --rm -v "${directory}:/${workspace_dir}" -w "${workspace_dir}")
 
 	# Persist Nix store
-	container_args+=(-v nix-store:/nix/store)
+	command_opts+=(-v nix-store:/nix/store)
 
 	# Import the .env file, if it exists
 	if [[ -f "${directory}/.env" ]]; then
-		container_args+=(--env-file "${directory}/.env")
+		command_opts+=(--env-file "${directory}/.env")
 	fi
 
 	# Mount the agents configuration directory, if it exists
 	if [[ -d "${agents_dir}" ]]; then
-		container_args+=(-v "${agents_dir}:${container_home_dir}/.agents")
+		command_opts+=(-v "${agents_dir}:${container_home_dir}/.agents")
 	fi
 
 	# Mount the OpenCode configuration directory, if it exists
 	if [[ -d "${opencode_dir}" ]]; then
-		container_args+=(-v "${opencode_dir}:${container_home_dir}/.config/opencode")
+		command_opts+=(-v "${opencode_dir}:${container_home_dir}/.config/opencode")
 	fi
 
-	exec docker run "${container_args[@]}" "${image_name}"
+	exec docker run "${command_opts[@]}" "${image_name}"
 }
 
 parse_args "${@}"
