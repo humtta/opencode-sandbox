@@ -12,13 +12,14 @@ RUN DEBIAN_FRONTEND=noninteractive apt update \
     && rm -rf /var/lib/apt/lists/*
 
 USER ${DEVBOX_USER}:${DEVBOX_USER}
+ENV HOME="/home/${DEVBOX_USER}"
 
 # Install OpenCode
 RUN curl -fsSL https://opencode.ai/v2/install | bash -s -- --no-modify-path
-ENV PATH="/home/${DEVBOX_USER}/.opencode/bin:${PATH}"
+ENV PATH="${HOME}/.opencode/bin:${PATH}"
 
 # Create user configuration directory
-RUN mkdir -p "/home/${DEVBOX_USER}/.config"
+RUN mkdir -p "${HOME}/.config"
 
 # Run entrypoint script
 COPY --chmod=755 entrypoint.sh /entrypoint.sh
