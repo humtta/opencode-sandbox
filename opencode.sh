@@ -158,8 +158,8 @@ run_container() {
 	command_opts+=(-v nix-store:/nix/store)
 
 	# Import the .env file, if it exists
-	if [[ -f "${directory}/.env" ]]; then
-		command_opts+=(--env-file "${directory}/.env")
+	if [[ -f "${repo_dir}/.env" ]]; then
+		command_opts+=(--env-file "${repo_dir}/.env")
 	fi
 
 	# Mount the agents configuration directory, if it exists
