@@ -146,7 +146,7 @@ build_image() {
 #   None
 run_container() {
 	local command_opts=()
-	local workspace_dir="${container_home_dir}/$(basename $(realpath ${directory}))"
+	local workspace_dir="${container_home_dir}/$(basename "$(realpath "${directory}")")"
 
 	# Base arguments
 	command_opts+=(-it --rm -v "${directory}:/${workspace_dir}" -w "${workspace_dir}")
