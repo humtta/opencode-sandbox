@@ -151,6 +151,9 @@ run_container() {
 	# Base arguments
 	command_opts+=(-it --rm -v "${directory}:/${workspace_dir}" -w "${workspace_dir}")
 
+	# Synchronize time with the host
+	command_opts+=(-v /etc/localtime:/etc/localtime:ro)
+
 	# Persist Nix store
 	command_opts+=(-v nix-store:/nix/store)
 
